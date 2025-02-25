@@ -27,14 +27,14 @@
             left: 20px;
             font-size: 28px;
             color: #ff69b4;
-            text-shadow: 0 0 5px #fff, 0 0 10px #ff69b4;
+            text-shadow: 0 0 5px #fff, 0 0 10px #8b4513;
             z-index: 0;
             transform: rotate(-10deg);
-            animation: glowTitle 2s infinite alternate;
+            animation: flickerText 2s infinite alternate;
         }
-        @keyframes glowTitle {
-            from { text-shadow: 0 0 5px #fff, 0 0 10px #ff69b4; }
-            to { text-shadow: 0 0 10px #fff, 0 0 20px #ff69b4; }
+        @keyframes flickerText {
+            from { opacity: 1; text-shadow: 0 0 5px #fff, 0 0 10px #8b4513; }
+            to { opacity: 0.9; text-shadow: 0 0 10px #fff, 0 0 15px #8b4513; }
         }
         body::after {
             content: '';
@@ -43,7 +43,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 245, 220, 0.4);
+            background: rgba(47, 79, 79, 0.3);
             z-index: -1;
         }
 
@@ -59,11 +59,12 @@
             background: url('https://img.icons8.com/fluency/48/ff69b4/rose.png') no-repeat center;
             background-size: contain;
             animation: floatRose 10s infinite ease-in-out;
+            filter: drop-shadow(0 0 5px #8b4513);
         }
         .letter {
             font-size: 24px;
             color: #ff69b4;
-            text-shadow: 0 0 5px #fff;
+            text-shadow: 0 0 5px #fff, 0 0 10px #8b4513;
             animation: floatLetter 8s infinite ease-in-out;
         }
         .clue {
@@ -72,6 +73,14 @@
             background: url('https://img.icons8.com/ios-filled/50/8b4513/fingerprint.png') no-repeat center;
             background-size: contain;
             animation: spinClue 12s infinite ease-in-out;
+            filter: drop-shadow(0 0 5px #8b4513);
+        }
+        .paper {
+            width: 35px;
+            height: 35px;
+            background: url('https://img.icons8.com/ios-filled/50/4682b4/document.png') no-repeat center;
+            background-size: contain;
+            animation: driftPaper 14s infinite ease-in-out;
         }
         @keyframes floatRose {
             0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
@@ -88,6 +97,11 @@
             50% { transform: translateY(15vh) rotate(180deg); opacity: 0.3; }
             100% { transform: translateY(0) rotate(360deg); opacity: 0.6; }
         }
+        @keyframes driftPaper {
+            0% { transform: translateX(0) rotate(0deg); opacity: 0.5; }
+            50% { transform: translateX(-15vw) rotate(45deg); opacity: 0.3; }
+            100% { transform: translateX(0) rotate(0deg); opacity: 0.5; }
+        }
 
         /* Фоновые частицы */
         .background-particles {
@@ -99,18 +113,18 @@
             pointer-events: none;
             z-index: 0;
         }
-        .bg-petal {
+        .bg-dust {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background: radial-gradient(circle, #ff69b4, transparent);
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, rgba(139, 69, 19, 0.3), transparent);
             border-radius: 50%;
-            animation: petalDrift 15s infinite ease-in-out;
+            animation: dustDrift 12s infinite ease-in-out;
         }
-        @keyframes petalDrift {
-            0% { transform: translateX(0) translateY(0); opacity: 0.5; }
-            50% { transform: translateX(-20vw) translateY(-50vh); opacity: 0.2; }
-            100% { transform: translateX(0) translateY(-100vh); opacity: 0; }
+        @keyframes dustDrift {
+            0% { transform: translateX(0) translateY(0); opacity: 0.4; }
+            50% { transform: translateX(10vw) translateY(-40vh); opacity: 0.2; }
+            100% { transform: translateX(0) translateY(-80vh); opacity: 0; }
         }
 
         /* Эффектные частицы */
@@ -130,6 +144,7 @@
             background: radial-gradient(circle, #ff69b4, transparent);
             border-radius: 50%;
             animation: petalFall 2s ease-out forwards;
+            filter: drop-shadow(0 0 5px #ff69b4);
         }
         @keyframes petalFall {
             0% { transform: scale(1); opacity: 0.8; }
@@ -142,6 +157,7 @@
             background: radial-gradient(circle, rgba(139, 69, 19, 0.4), transparent);
             border-radius: 50%;
             animation: dustBurst 2s ease-out forwards;
+            filter: drop-shadow(0 0 5px #8b4513);
         }
         @keyframes dustBurst {
             0% { transform: scale(1); opacity: 0.8; }
@@ -151,9 +167,10 @@
             position: absolute;
             width: 8px;
             height: 8px;
-            background: #8b4513;
+            background: #4682b4;
             border-radius: 50%;
             animation: sparkFly 1.5s ease-out forwards;
+            filter: drop-shadow(0 0 5px #4682b4);
         }
         @keyframes sparkFly {
             0% { transform: scale(1); opacity: 1; }
@@ -169,17 +186,18 @@
             background-size: contain;
             cursor: pointer;
             z-index: 5;
-            transition: transform 0.3s;
+            transition: transform 0.3s, opacity 0.3s;
         }
         .hint:hover {
             transform: scale(1.2) rotate(10deg);
+            opacity: 0.9;
         }
         .hint-text {
             position: absolute;
             display: none;
             background: rgba(245, 222, 179, 0.95);
             padding: 15px;
-            border: 2px solid #ff69b4;
+            border: 2px solid #8b4513;
             border-radius: 10px;
             font-size: 16px;
             color: #8b4513;
@@ -196,16 +214,16 @@
             100% { opacity: 1; transform: translateY(0); }
         }
         #hint1 { top: 20%; right: 10%; }
-        #hint1 .hint-text { top: 60px; right: 0; width: 200px; }
+        #hint1 .hint-text { top: 60px; right: 0; width: 220px; }
         #hint2 { bottom: 20%; left: 10%; }
-        #hint2 .hint-text { bottom: 60px; left: 0; width: 200px; }
+        #hint2 .hint-text { bottom: 60px; left: 0; width: 220px; }
         #hint3 { top: 50%; right: 15%; }
-        #hint3 .hint-text { top: 60px; right: 0; width: 200px; }
+        #hint3 .hint-text { top: 60px; right: 0; width: 220px; }
 
         /* Верхняя панель */
         #prizeBar {
             padding: 20px;
-            background: rgba(255, 245, 238, 0.9);
+            background: rgba(245, 222, 179, 0.9);
             text-align: center;
             border-bottom: 4px solid #8b4513;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
@@ -222,6 +240,7 @@
             background: url('https://img.icons8.com/ios-filled/50/ff69b4/rose.png') no-repeat center;
             background-size: contain;
             opacity: 0.5;
+            animation: pulseIcon 2s infinite alternate;
         }
         #prizeBar::after {
             content: '';
@@ -233,6 +252,11 @@
             background: url('https://img.icons8.com/ios-filled/50/8b4513/fingerprint.png') no-repeat center;
             background-size: contain;
             opacity: 0.5;
+            animation: pulseIcon 2s infinite alternate;
+        }
+        @keyframes pulseIcon {
+            from { transform: scale(1); opacity: 0.5; }
+            to { transform: scale(1.1); opacity: 0.7; }
         }
         #prizeText {
             font-size: 34px;
@@ -286,6 +310,12 @@
             background: url('https://img.icons8.com/ios-filled/50/8b4513/magnifying-glass.png') no-repeat center;
             background-size: contain;
             opacity: 0.6;
+            animation: swayIcon 3s infinite ease-in-out;
+        }
+        @keyframes swayIcon {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(10deg); }
+            100% { transform: rotate(0deg); }
         }
         .active {
             display: block;
@@ -386,7 +416,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(245, 245, 220, 0.9);
+            background: rgba(245, 222, 179, 0.9);
             animation: openDoor 3.5s ease-in-out forwards;
             z-index: 999;
         }
@@ -441,6 +471,8 @@
     <div class="scattered letter" style="top: 75%; left: 60%;">М</div>
     <div class="scattered clue" style="top: 20%; left: 85%; animation-delay: 1s;"></div>
     <div class="scattered clue" style="top: 70%; left: 25%; animation-delay: 3s;"></div>
+    <div class="scattered paper" style="top: 35%; left: 65%; animation-delay: 5s;"></div>
+    <div class="scattered paper" style="top: 85%; left: 45%; animation-delay: 7s;"></div>
 
     <!-- Фоновые частицы -->
     <div class="background-particles" id="bgParticles"></div>
@@ -497,14 +529,14 @@
         const effectParticleContainer = document.getElementById("effectParticles");
         const prizeWords = document.querySelectorAll(".prize-word");
 
-        // Фоновые лепестки
-        for (let i = 0; i < 20; i++) {
-            const petal = document.createElement("div");
-            petal.className = "bg-petal";
-            petal.style.left = `${Math.random() * 100}%`;
-            petal.style.top = `${Math.random() * 100}%`;
-            petal.style.animationDelay = `${Math.random() * 15}s`;
-            bgParticleContainer.appendChild(petal);
+        // Фоновые частицы (пыль)
+        for (let i = 0; i < 25; i++) {
+            const dust = document.createElement("div");
+            dust.className = "bg-dust";
+            dust.style.left = `${Math.random() * 100}%`;
+            dust.style.top = `${Math.random() * 100}%`;
+            dust.style.animationDelay = `${Math.random() * 12}s`;
+            bgParticleContainer.appendChild(dust);
         }
 
         // Создание эффектных частиц
@@ -591,7 +623,7 @@
                     setTimeout(() => door.remove(), 2000);
                 }, 2500);
             } else {
-                messageDiv.innerHTML = `<span class="animate__animated animate__shakeX">Код неверный!.</span>`;
+                messageDiv.innerHTML = `<span class="animate__animated animate__shakeX">Код неверный! Используй подсказку.</span>`;
             }
         }
     </script>
