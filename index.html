@@ -9,7 +9,7 @@
         body {
             margin: 0;
             padding: 0;
-            background: url('https://images.unsplash.com/photo-1485182708500-e8f1f318ba72?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+            background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
             background-size: cover;
             font-family: 'Courier New', Courier, monospace;
             color: #333;
@@ -43,7 +43,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(47, 79, 79, 0.3);
+            background: rgba(47, 79, 79, 0.5);
             z-index: -1;
         }
 
@@ -53,12 +53,12 @@
             pointer-events: none;
             z-index: 0;
         }
-        .rose {
+        .photo {
             width: 40px;
             height: 40px;
-            background: url('https://img.icons8.com/fluency/48/ff69b4/rose.png') no-repeat center;
+            background: url('https://img.icons8.com/ios-filled/50/8b4513/photo.png') no-repeat center;
             background-size: contain;
-            animation: floatRose 10s infinite ease-in-out;
+            animation: floatPhoto 10s infinite ease-in-out;
             filter: drop-shadow(0 0 5px #8b4513);
         }
         .letter {
@@ -70,22 +70,22 @@
         .clue {
             width: 30px;
             height: 30px;
-            background: url('https://img.icons8.com/ios-filled/50/8b4513/fingerprint.png') no-repeat center;
+            background: url('https://img.icons8.com/ios-filled/50/4682b4/fingerprint.png') no-repeat center;
             background-size: contain;
             animation: spinClue 12s infinite ease-in-out;
-            filter: drop-shadow(0 0 5px #8b4513);
+            filter: drop-shadow(0 0 5px #4682b4);
         }
         .paper {
             width: 35px;
             height: 35px;
-            background: url('https://img.icons8.com/ios-filled/50/4682b4/document.png') no-repeat center;
+            background: url('https://img.icons8.com/ios-filled/50/8b4513/document.png') no-repeat center;
             background-size: contain;
             animation: driftPaper 14s infinite ease-in-out;
         }
-        @keyframes floatRose {
+        @keyframes floatPhoto {
             0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
-            50% { transform: translateY(-20vh) rotate(180deg); opacity: 0.5; }
-            100% { transform: translateY(0) rotate(360deg); opacity: 0.8; }
+            50% { transform: translateY(-20vh) rotate(90deg); opacity: 0.5; }
+            100% { transform: translateY(0) rotate(180deg); opacity: 0.8; }
         }
         @keyframes floatLetter {
             0% { transform: translateX(0) rotate(0deg); opacity: 0.7; }
@@ -219,6 +219,8 @@
         #hint2 .hint-text { bottom: 60px; left: 0; width: 220px; }
         #hint3 { top: 50%; right: 15%; }
         #hint3 .hint-text { top: 60px; right: 0; width: 220px; }
+        #hint4 { bottom: 30%; left: 15%; }
+        #hint4 .hint-text { bottom: 60px; left: 0; width: 220px; }
 
         /* Верхняя панель */
         #prizeBar {
@@ -237,7 +239,7 @@
             left: -10px;
             width: 50px;
             height: 50px;
-            background: url('https://img.icons8.com/ios-filled/50/ff69b4/rose.png') no-repeat center;
+            background: url('https://img.icons8.com/ios-filled/50/4682b4/magnifying-glass.png') no-repeat center;
             background-size: contain;
             opacity: 0.5;
             animation: pulseIcon 2s infinite alternate;
@@ -460,10 +462,9 @@
 </head>
 <body>
     <!-- Разбросанные элементы -->
-    <div class="scattered rose" style="top: 10%; left: 15%; animation-delay: 0s;"></div>
-    <div class="scattered rose" style="top: 60%; left: 80%; animation-delay: 2s;"></div>
-    <div class="scattered rose" style="top: 80%; left: 20%; animation-delay: 4s;"></div>
-    <div class="scattered rose" style="top: 30%; left: 50%; animation-delay: 6s;"></div>
+    <div class="scattered photo" style="top: 10%; left: 15%; animation-delay: 0s;"></div>
+    <div class="scattered photo" style="top: 60%; left: 80%; animation-delay: 2s;"></div>
+    <div class="scattered photo" style="top: 80%; left: 20%; animation-delay: 4s;"></div>
     <div class="scattered letter" style="top: 25%; left: 70%;">6</div>
     <div class="scattered letter" style="top: 45%; left: 10%;">А</div>
     <div class="scattered letter" style="top: 65%; left: 90%;">8</div>
@@ -484,19 +485,13 @@
         <div class="hint-text">Собери слова из улик на столах команд!</div>
     </div>
     <div id="hint2" class="hint">
-        <div class="hint-text">Ключ связан с праздником весны!</div>
+        <div class="hint-text">Выбери правильный порядок букв: Д, Е, К, О, Д!</div>
     </div>
     <div id="hint3" class="hint">
-        <div class="hint-text">Ищи QR-коды и расшифруй их по таблице!</div>
+        <div class="hint-text">Ключ связан с праздником весны!</div>
     </div>
-
-    <!-- Верхняя панель -->
-    <div id="prizeBar">
-        <span id="prizeText">
-            <span class="prize-word">Призы</span>
-            <span class="prize-word">за</span>
-            <span class="prize-word">дверью!</span>
-        </span>
+    <div id="hint4" class="hint">
+        <div class="hint-text">Ищи QR-коды и расшифруй их по таблице!</div>
     </div>
 
     <!-- Часть 1: Улики поздравления -->
@@ -507,21 +502,30 @@
         <div id="message1" class="message"></div>
     </div>
 
-    <!-- Часть 2: Детективный замок -->
+    <!-- Часть 2: Расшифровка кода -->
     <div id="part2" class="section">
+        <h2>Расшифруй код</h2>
+        <p>Введи слово из букв: Д, Е, К, О, Д</p>
+        <input type="text" id="codeInput" placeholder="Введите слово">
+        <button onclick="checkCode()">Проверить</button>
+        <div id="message2" class="message"></div>
+    </div>
+
+    <!-- Часть 3: Детективный замок -->
+    <div id="part3" class="section">
         <h2>Открой замок</h2>
         <button onclick="checkKey('ВЕСНА')">ВЕСНА</button>
         <button onclick="checkKey('ЗИМА')">ЗИМА</button>
         <button onclick="checkKey('ЛЕТО')">ЛЕТО</button>
-        <div id="message2" class="message"></div>
+        <div id="message3" class="message"></div>
     </div>
 
-    <!-- Часть 3: QR-квест -->
-    <div id="part3" class="section">
+    <!-- Часть 4: QR-квест -->
+    <div id="part4" class="section">
         <h2>Раскрой код</h2>
         <input type="text" id="passwordInput" placeholder="Пароль из QR">
         <button onclick="checkPassword()">Взломать</button>
-        <div id="message3" class="message"></div>
+        <div id="message4" class="message"></div>
     </div>
 
     <script>
@@ -581,9 +585,33 @@
             }
         }
 
-        // Часть 2: Проверка ключа
-        function checkKey(key) {
+        // Часть 2: Расшифровка кода
+        function checkCode() {
+            const input = document.getElementById("codeInput").value.toUpperCase();
+            const correctAnswer = "ДЕКОД";
             const messageDiv = document.getElementById("message2");
+
+            if (input === correctAnswer) {
+                messageDiv.innerHTML = `<span class="animate__animated animate__fadeIn">Код расшифрован!</span>`;
+                const magnifier = document.createElement("div");
+                magnifier.className = "magnifier";
+                document.body.appendChild(magnifier);
+                createParticles("dust", 15, window.innerWidth / 2, window.innerHeight / 2);
+                createParticles("petal", 10, window.innerWidth / 2, window.innerHeight / 2);
+                setTimeout(() => {
+                    magnifier.remove();
+                    document.getElementById("part2").classList.remove("active");
+                    document.getElementById("part3").classList.add("active");
+                    document.getElementById("hint2").style.display = "none";
+                }, 2500);
+            } else {
+                messageDiv.innerHTML = `<span class="animate__animated animate__shakeX">Неверно! Проверь подсказку.</span>`;
+            }
+        }
+
+        // Часть 3: Детективный замок
+        function checkKey(key) {
+            const messageDiv = document.getElementById("message3");
             if (key === "ВЕСНА") {
                 messageDiv.innerHTML = `<span class="animate__animated animate__fadeIn">Замок открыт!</span>`;
                 const lock = document.createElement("div");
@@ -594,20 +622,20 @@
                 setTimeout(() => {
                     lock.remove();
                     prizeWords[1].classList.add("reveal");
-                    document.getElementById("part2").classList.remove("active");
-                    document.getElementById("part3").classList.add("active");
-                    document.getElementById("hint2").style.display = "none";
+                    document.getElementById("part3").classList.remove("active");
+                    document.getElementById("part4").classList.add("active");
+                    document.getElementById("hint3").style.display = "none";
                 }, 2500);
             } else {
                 messageDiv.innerHTML = `<span class="animate__animated animate__shakeX">Неверно! Проверь подсказку.</span>`;
             }
         }
 
-        // Часть 3: Проверка пароля
+        // Часть 4: QR-квест
         function checkPassword() {
             const input = document.getElementById("passwordInput").value.toUpperCase();
             const correctAnswer = "МАРТ";
-            const messageDiv = document.getElementById("message3");
+            const messageDiv = document.getElementById("message4");
 
             if (input === correctAnswer) {
                 messageDiv.innerHTML = `<span class="animate__animated animate__fadeIn">Дело раскрыто!</span>`;
@@ -619,7 +647,7 @@
                 createParticles("spark", 20, window.innerWidth / 2, window.innerHeight / 2);
                 setTimeout(() => {
                     prizeWords[2].classList.add("reveal");
-                    document.getElementById("hint3").style.display = "none";
+                    document.getElementById("hint4").style.display = "none";
                     setTimeout(() => door.remove(), 2000);
                 }, 2500);
             } else {
