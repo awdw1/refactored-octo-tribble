@@ -375,4 +375,226 @@
             content: '';
             position: absolute;
             width: 160px;
-            height: 160
+            height: 160px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: url('https://img.icons8.com/ios-filled/50/663300/door.png') no-repeat center;
+            background-size: contain;
+            animation: doorSpin 3.5s ease-in-out forwards;
+            filter: drop-shadow(0 0 20px #663300);
+        }
+        .door::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 153, 153, 0.3), transparent);
+            animation: doorGlow 3.5s ease-in-out forwards;
+        }
+        @keyframes openDoor {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0; transform: scale(1.2); }
+        }
+        @keyframes doorSpin {
+            0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+            50% { transform: translate(-50%, -50%) scale(1.3) rotate(45deg); }
+            100% { transform: translate(-50%, -100%) scale(1.5) rotate(90deg); }
+        }
+        @keyframes doorGlow {
+            0% { opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Разбросанные элементы -->
+    <div class="scattered photo" style="top: 10%; left: 15%; animation-delay: 0s;"></div>
+    <div class="scattered photo" style="top: 60%; left: 80%; animation-delay: 2s;"></div>
+    <div class="scattered photo" style="top: 80%; left: 20%; animation-delay: 4s;"></div>
+    <div class="scattered letter" style="top: 25%; left: 70%;">6</div>
+    <div class="scattered letter" style="top: 45%; left: 10%;">А</div>
+    <div class="scattered letter" style="top: 65%; left: 90%;">8</div>
+    <div class="scattered letter" style="top: 15%; left: 40%;">Д</div>
+    <div class="scattered letter" style="top: 75%; left: 60%;">М</div>
+    <div class="scattered clue" style="top: 20%; left: 85%; animation-delay: 1s;"></div>
+    <div class="scattered clue" style="top: 70%; left: 25%; animation-delay: 3s;"></div>
+    <div class="scattered paper" style="top: 35%; left: 65%; animation-delay: 5s;"></div>
+    <div class="scattered paper" style="top: 85%; left: 45%; animation-delay: 7s;"></div>
+
+    <!-- Фоновые частицы -->
+    <div class="background-particles" id="bgParticles"></div>
+    <!-- Эффектные частицы -->
+    <div class="effect-particles" id="effectParticles"></div>
+
+    <!-- Верхняя панель -->
+    <div id="prizeBar">
+        <span id="prizeText">
+            <span class="prize-word" id="word1">Призы</span>
+            <span class="prize-word" id="word2">за</span>
+            <span class="prize-word" id="word3">дверью!</span>
+        </span>
+    </div>
+
+    <!-- Часть 1: Улики поздравления -->
+    <div id="part1" class="section active">
+        <h2>Взломай послание</h2>
+        <input type="text" id="greetingInput" placeholder="Без пробелов и запятой">
+        <button onclick="checkGreeting()">Проверить</button>
+        <div id="message1" class="message"></div>
+    </div>
+
+    <!-- Часть 2: Собери пазл -->
+    <div id="part2" class="section">
+        <h2>Собери пазл</h2>
+        <p>Выбери правильный порядок частей пазла:</p>
+        <div class="puzzle-options">
+            <button onclick="checkPuzzle('Часть 1-Часть 3-Часть 2')">Часть 1-Часть 3-Часть 2</button>
+            <button onclick="checkPuzzle('Часть 1-Часть 2-Часть 3')">Часть 1-Часть 2-Часть 3</button>
+            <button onclick="checkPuzzle('Часть 3-Часть 2-Часть 1')">Часть 3-Часть 2-Часть 1</button>
+        </div>
+        <div id="message2" class="message"></div>
+    </div>
+
+    <!-- Часть 3: Детективный замок -->
+    <div id="part3" class="section">
+        <h2>Открой замок</h2>
+        <button onclick="checkKey('ВЕСНА')">ВЕСНА</button>
+        <button onclick="checkKey('ЗИМА')">ЗИМА</button>
+        <button onclick="checkKey('ЛЕТО')">ЛЕТО</button>
+        <div id="message3" class="message"></div>
+    </div>
+
+    <!-- Часть 4: QR-квест -->
+    <div id="part4" class="section">
+        <h2>Раскрой код</h2>
+        <input type="text" id="passwordInput" placeholder="Пароль из QR">
+        <button onclick="checkPassword()">Взломать</button>
+        <div id="message4" class="message"></div>
+    </div>
+
+    <script>
+        const bgParticleContainer = document.getElementById("bgParticles");
+        const effectParticleContainer = document.getElementById("effectParticles");
+
+        // Фоновые частицы (пыль)
+        for (let i = 0; i < 25; i++) {
+            const dust = document.createElement("div");
+            dust.className = "bg-dust";
+            dust.style.left = `${Math.random() * 100}%`;
+            dust.style.top = `${Math.random() * 100}%`;
+            dust.style.animationDelay = `${Math.random() * 12}s`;
+            bgParticleContainer.appendChild(dust);
+        }
+
+        // Создание эффектных частиц
+        function createParticles(type, count, x, y) {
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement("div");
+                particle.className = type;
+                const dx = (Math.random() - 0.5) * 200;
+                const dy = (Math.random() - 0.5) * 200;
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                particle.style.setProperty("--dx", `${dx}px`);
+                particle.style.setProperty("--dy", `${dy}px`);
+                particle.style.animationDelay = `${Math.random() * 0.5}s`;
+                effectParticleContainer.appendChild(particle);
+                setTimeout(() => particle.remove(), 2500);
+            }
+        }
+
+        // Часть 1: Проверка поздравления
+        function checkGreeting() {
+            const input = document.getElementById("greetingInput").value.toUpperCase();
+            const correctAnswer = "СПРАЗДНИКОМДЕТЕКТИВЫ";
+            const messageDiv = document.getElementById("message1");
+
+            if (input === correctAnswer) {
+                messageDiv.innerHTML = `<span class="animate__animated animate__fadeIn">Улика найдена!</span>`;
+                const magnifier = document.createElement("div");
+                magnifier.className = "magnifier";
+                document.body.appendChild(magnifier);
+                createParticles("petal", 20, window.innerWidth / 2, window.innerHeight / 2);
+                createParticles("spark", 10, window.innerWidth / 2, window.innerHeight / 2);
+                setTimeout(() => {
+                    magnifier.remove();
+                    document.getElementById("word1").classList.add("reveal");
+                    document.getElementById("part1").classList.remove("active");
+                    document.getElementById("part2").classList.add("active");
+                }, 2500);
+            } else {
+                messageDiv.innerHTML = `<span class="animate__animated animate__shakeX">Ошибка!</span>`;
+            }
+        }
+
+        // Часть 2: Собери пазл
+        function checkPuzzle(order) {
+            const correctAnswer = "Часть 1-Часть 2-Часть 3";
+            const messageDiv = document.getElementById("message2");
+
+            if (order === correctAnswer) {
+                messageDiv.innerHTML = `<span class="animate__animated animate__fadeIn">Пазл собран!</span>`;
+                const magnifier = document.createElement("div");
+                magnifier.className = "magnifier";
+                document.body.appendChild(magnifier);
+                createParticles("dust", 15, window.innerWidth / 2, window.innerHeight / 2);
+                createParticles("petal", 10, window.innerWidth / 2, window.innerHeight / 2);
+                setTimeout(() => {
+                    magnifier.remove();
+                    document.getElementById("word2").classList.add("reveal");
+                    document.getElementById("part2").classList.remove("active");
+                    document.getElementById("part3").classList.add("active");
+                }, 2500);
+            } else {
+                messageDiv.innerHTML = `<span class="animate__animated animate__shakeX">Неверно!</span>`;
+            }
+        }
+
+        // Часть 3: Детективный замок
+        function checkKey(key) {
+            const messageDiv = document.getElementById("message3");
+            if (key === "ВЕСНА") {
+                messageDiv.innerHTML = `<span class="animate__animated animate__fadeIn">Замок открыт!</span>`;
+                const lock = document.createElement("div");
+                lock.className = "lock";
+                document.body.appendChild(lock);
+                createParticles("dust", 15, window.innerWidth / 2, window.innerHeight / 2);
+                createParticles("petal", 10, window.innerWidth / 2, window.innerHeight / 2);
+                setTimeout(() => {
+                    lock.remove();
+                    document.getElementById("word3").classList.add("reveal");
+                    document.getElementById("part3").classList.remove("active");
+                    document.getElementById("part4").classList.add("active");
+                }, 2500);
+            } else {
+                messageDiv.innerHTML = `<span class="animate__animated animate__shakeX">Неверно!</span>`;
+            }
+        }
+
+        // Часть 4: QR-квест
+        function checkPassword() {
+            const input = document.getElementById("passwordInput").value.toUpperCase();
+            const correctAnswer = "МАРТРОЗЫ";
+            const messageDiv = document.getElementById("message4");
+
+            if (input === correctAnswer) {
+                messageDiv.innerHTML = `<span class="animate__animated animate__fadeIn">Дело раскрыто!</span>`;
+                const door = document.createElement("div");
+                door.className = "door";
+                document.body.appendChild(door);
+                createParticles("petal", 25, window.innerWidth / 2, window.innerHeight / 2);
+                createParticles("dust", 15, window.innerWidth / 2, window.innerHeight / 2);
+                createParticles("spark", 20, window.innerWidth / 2, window.innerHeight / 2);
+                setTimeout(() => {
+                    door.remove();
+                }, 3500);
+            } else {
+                messageDiv.innerHTML = `<span class="animate__animated animate__shakeX">Код неверный!</span>`;
+            }
+        }
+    </script>
+</body>
+</html>
