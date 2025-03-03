@@ -9,7 +9,7 @@
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #2c1e1e, #7a4f2f); /* Б более насыщенный градиент */
+            background: linear-gradient(135deg, #2c1e1e, #7a4f2f); /* Насыщенный градиент */
             font-family: 'Courier New', Courier, monospace;
             color: #fff;
             overflow: hidden;
@@ -368,22 +368,6 @@
             text-shadow: 0 0 10px #fff, 0 0 20px #ff66b3;
             margin-top: 20px;
         }
-        .puzzle-options button {
-            margin: 8px;
-            padding: 12px 25px;
-            font-size: 20px;
-            background: #fffaf0;
-            border: 2px solid #ff66b3;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.4s;
-        }
-        .puzzle-options button:hover {
-            background: #ff66b3;
-            color: #fff;
-            box-shadow: 0 0 25px #ff66b3, 0 0 35px #4a2c00;
-            transform: scale(1.1) rotate(2deg);
-        }
 
         /* Анимации */
         .magnifier {
@@ -517,33 +501,21 @@
         <div id="message1" class="message"></div>
     </div>
 
-    <!-- Часть 2: Собери пазл -->
+    <!-- Часть 2: Детективный замок -->
     <div id="part2" class="section">
-        <h2>Собери пазл</h2>
-        <p>Выбери правильный порядок частей пазла:</p>
-        <div class="puzzle-options">
-            <button onclick="checkPuzzle('Часть 1-Часть 3-Часть 2')">Часть 1-Часть 3-Часть 2</button>
-            <button onclick="checkPuzzle('Часть 1-Часть 2-Часть 3')">Часть 1-Часть 2-Часть 3</button>
-            <button onclick="checkPuzzle('Часть 3-Часть 2-Часть 1')">Часть 3-Часть 2-Часть 1</button>
-        </div>
-        <div id="message2" class="message"></div>
-    </div>
-
-    <!-- Часть 3: Детективный замок -->
-    <div id="part3" class="section">
         <h2>Открой замок</h2>
         <button onclick="checkKey('ВЕСНА')">ВЕСНА</button>
         <button onclick="checkKey('ЗИМА')">ЗИМА</button>
         <button onclick="checkKey('ЛЕТО')">ЛЕТО</button>
-        <div id="message3" class="message"></div>
+        <div id="message2" class="message"></div>
     </div>
 
-    <!-- Часть 4: QR-квест -->
-    <div id="part4" class="section">
+    <!-- Часть 3: QR-квест -->
+    <div id="part3" class="section">
         <h2>Раскрой код</h2>
         <input type="text" id="passwordInput" placeholder="Пароль из QR">
         <button onclick="checkPassword()">Взломать</button>
-        <div id="message4" class="message"></div>
+        <div id="message3" class="message"></div>
     </div>
 
     <script>
@@ -600,6 +572,7 @@
                 setTimeout(() => {
                     magnifier.remove();
                     document.getElementById("word1").classList.add("reveal");
+                    document.getElementById("word2").classList.add("reveal");
                     document.getElementById("part1").classList.remove("active");
                     document.getElementById("part2").classList.add("active");
                 }, 3000);
@@ -608,33 +581,9 @@
             }
         }
 
-        // Часть 2: Собери пазл
-        function checkPuzzle(order) {
-            const correctAnswer = "Часть 1-Часть 2-Часть 3";
-            const messageDiv = document.getElementById("message2");
-
-            if (order === correctAnswer) {
-                messageDiv.innerHTML = `<span class="animate__animated animate__fadeIn">Пазл собран!</span>`;
-                const magnifier = document.createElement("div");
-                magnifier.className = "magnifier";
-                document.body.appendChild(magnifier);
-                createParticles("dust", 20, window.innerWidth / 2, window.innerHeight / 2);
-                createParticles("petal", 15, window.innerWidth / 2, window.innerHeight / 2);
-                createParticles("spark", 10, window.innerWidth / 2, window.innerHeight / 2);
-                setTimeout(() => {
-                    magnifier.remove();
-                    document.getElementById("word2").classList.add("reveal");
-                    document.getElementById("part2").classList.remove("active");
-                    document.getElementById("part3").classList.add("active");
-                }, 3000);
-            } else {
-                messageDiv.innerHTML = `<span class="animate__animated animate__shakeX">Неверно!</span>`;
-            }
-        }
-
-        // Часть 3: Детективный замок
+        // Часть 2: Детективный замок
         function checkKey(key) {
-            const messageDiv = document.getElementById("message3");
+            const messageDiv = document.getElementById("message2");
             if (key === "ВЕСНА") {
                 messageDiv.innerHTML = `<span class="animate__animated animate__fadeIn">Замок открыт!</span>`;
                 const lock = document.createElement("div");
@@ -646,19 +595,19 @@
                 setTimeout(() => {
                     lock.remove();
                     document.getElementById("word3").classList.add("reveal");
-                    document.getElementById("part3").classList.remove("active");
-                    document.getElementById("part4").classList.add("active");
+                    document.getElementById("part2").classList.remove("active");
+                    document.getElementById("part3").classList.add("active");
                 }, 3000);
             } else {
                 messageDiv.innerHTML = `<span class="animate__animated animate__shakeX">Неверно!</span>`;
             }
         }
 
-        // Часть 4: QR-квест
+        // Часть 3: QR-квест
         function checkPassword() {
             const input = document.getElementById("passwordInput").value.toUpperCase();
             const correctAnswer = "МАРТРОЗЫ";
-            const messageDiv = document.getElementById("message4");
+            const messageDiv = document.getElementById("message3");
 
             if (input === correctAnswer) {
                 messageDiv.innerHTML = `<span class="animate__animated animate__fadeIn">Дело раскрыто!</span>`;
