@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Дело о пропавших призах</title>
+    <title>Дело о Призах 8 Марта</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #2c1e1e, #7a4f2f); /* Насыщенный градиент */
-            font-family: 'Courier New', Courier, monospace;
+            background: linear-gradient(135deg, #ff99cc, #ffd700); /* Мягкий розово-золотой градиент */
+            font-family: 'Arial', sans-serif;
             color: #fff;
             overflow: hidden;
             height: 100vh;
@@ -25,466 +25,181 @@
             top: 20px;
             left: 20px;
             font-size: 32px;
-            color: #ff66b3; /* Яркий розовый */
-            text-shadow: 0 0 10px #fff, 0 0 20px #4a2c00; /* Тёмно-коричневый с яркостью */
-            z-index: 0;
-            transform: rotate(-10deg);
-            animation: neonFlicker 1.5s infinite alternate;
+            color: #ff66b3;
+            text-shadow: 0 0 5px #fff, 0 0 10px #ffd700;
+            animation: fadePulse 2s infinite ease-in-out;
         }
-        @keyframes neonFlicker {
-            0% { opacity: 1; text-shadow: 0 0 10px #fff, 0 0 20px #4a2c00; }
-            50% { opacity: 0.9; text-shadow: 0 0 15px #fff, 0 0 25px #4a2c00; }
-            100% { opacity: 1; text-shadow: 0 0 20px #fff, 0 0 30px #4a2c00; }
+        @keyframes fadePulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
         }
 
-        /* Разбросанные элементы */
-        .scattered {
+        /* Фоновые элементы */
+        .bg-element {
             position: absolute;
             pointer-events: none;
             z-index: 0;
         }
-        .photo {
+        .gift {
             width: 50px;
             height: 50px;
-            background: url('https://img.icons8.com/ios-filled/50/4a2c00/photo.png') no-repeat center;
+            background: url('https://img.icons8.com/color/50/ffffff/gift.png') no-repeat center;
             background-size: contain;
-            animation: floatPhoto 12s infinite ease-in-out;
-            filter: drop-shadow(0 0 15px #4a2c00);
-        }
-        .letter {
-            font-size: 28px;
-            color: #ff66b3;
-            text-shadow: 0 0 10px #fff, 0 0 20px #4a2c00;
-            animation: floatLetter 10s infinite ease-in-out;
-        }
-        .clue {
-            width: 35px;
-            height: 35px;
-            background: url('https://img.icons8.com/ios-filled/50/b8860b/fingerprint.png') no-repeat center;
-            background-size: contain;
-            animation: spinClue 14s infinite ease-in-out;
-            filter: drop-shadow(0 0 15px #b8860b);
-        }
-        .paper {
-            width: 40px;
-            height: 40px;
-            background: url('https://img.icons8.com/ios-filled/50/4a2c00/document.png') no-repeat center;
-            background-size: contain;
-            animation: driftPaper 16s infinite ease-in-out;
+            animation: gentleFloat 15s infinite ease-in-out;
         }
         .rose {
-            width: 45px;
-            height: 45px;
-            background: url('https://img.icons8.com/fluency/48/ff66b3/rose.png') no-repeat center;
+            width: 40px;
+            height: 40px;
+            background: url('https://img.icons8.com/color/40/ffffff/rose.png') no-repeat center;
             background-size: contain;
-            animation: floatRose 15s infinite ease-in-out;
-            filter: drop-shadow(0 0 15px #ff66b3);
+            animation: gentleFloat 12s infinite ease-in-out;
         }
-        @keyframes floatPhoto {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
-            30% { transform: translateY(-25vh) rotate(90deg); opacity: 0.6; }
-            60% { transform: translateY(10vh) rotate(180deg); opacity: 0.4; }
-            100% { transform: translateY(0) rotate(360deg); opacity: 0.8; }
-        }
-        @keyframes floatLetter {
-            0% { transform: translateX(0) rotate(0deg); opacity: 0.7; }
-            40% { transform: translateX(15vw) rotate(90deg); opacity: 0.5; }
-            70% { transform: translateX(-10vw) rotate(180deg); opacity: 0.3; }
-            100% { transform: translateX(0) rotate(0deg); opacity: 0.7; }
-        }
-        @keyframes spinClue {
+        @keyframes gentleFloat {
             0% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
-            40% { transform: translateY(20vh) rotate(180deg); opacity: 0.4; }
-            70% { transform: translateY(-10vh) rotate(270deg); opacity: 0.2; }
-            100% { transform: translateY(0) rotate(360deg); opacity: 0.6; }
-        }
-        @keyframes driftPaper {
-            0% { transform: translateX(0) rotate(0deg); opacity: 0.5; }
-            30% { transform: translateX(-20vw) rotate(45deg); opacity: 0.3; }
-            60% { transform: translateX(10vw) rotate(90deg); opacity: 0.2; }
-            100% { transform: translateX(0) rotate(0deg); opacity: 0.5; }
-        }
-        @keyframes floatRose {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
-            40% { transform: translateY(-15vh) rotate(120deg); opacity: 0.6; }
-            70% { transform: translateY(5vh) rotate(240deg); opacity: 0.4; }
-            100% { transform: translateY(0) rotate(360deg); opacity: 0.8; }
-        }
-
-        /* Фоновые частицы */
-        .background-particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .bg-dust {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: radial-gradient(circle, rgba(74, 44, 0, 0.4), transparent);
-            border-radius: 50%;
-            animation: dustDrift 15s infinite ease-in-out;
-        }
-        .bg-spark {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: #b8860b;
-            border-radius: 50%;
-            animation: sparkDrift 12s infinite ease-in-out;
-        }
-        @keyframes dustDrift {
-            0% { transform: translateX(0) translateY(0); opacity: 0.4; }
-            30% { transform: translateX(15vw) translateY(-30vh); opacity: 0.3; }
-            60% { transform: translateX(-10vw) translateY(-60vh); opacity: 0.2; }
-            100% { transform: translateX(0) translateY(-90vh); opacity: 0; }
-        }
-        @keyframes sparkDrift {
-            0% { transform: translateX(0) translateY(0); opacity: 0.6; }
-            40% { transform: translateX(-12vw) translateY(-40vh); opacity: 0.4; }
-            80% { transform: translateX(8vw) translateY(-70vh); opacity: 0.2; }
-            100% { transform: translateX(0) translateY(-100vh); opacity: 0; }
-        }
-
-        /* Эффектные частицы */
-        .effect-particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 10;
-        }
-        .petal {
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            background: radial-gradient(circle, #ff66b3, transparent);
-            border-radius: 50%;
-            animation: petalFall 2.5s ease-out forwards;
-            filter: drop-shadow(0 0 10px #ff66b3);
-        }
-        .dust {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: radial-gradient(circle, rgba(74, 44, 0, 0.5), transparent);
-            border-radius: 50%;
-            animation: dustBurst 2.5s ease-out forwards;
-            filter: drop-shadow(0 0 10px #4a2c00);
-        }
-        .spark {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #b8860b;
-            border-radius: 50%;
-            animation: sparkFly 2s ease-out forwards;
-            filter: drop-shadow(0 0 10px #b8860b);
-        }
-        @keyframes petalFall {
-            0% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.2) translateY(20px); opacity: 0.7; }
-            100% { transform: scale(0.5) translate(var(--dx), var(--dy)); opacity: 0; }
-        }
-        @keyframes dustBurst {
-            0% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.5) translateY(10px); opacity: 0.6; }
-            100% { transform: scale(2) translate(var(--dx), var(--dy)); opacity: 0; }
-        }
-        @keyframes sparkFly {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.3) translateY(-10px); opacity: 0.8; }
-            100% { transform: scale(0) translate(var(--dx), var(--dy)); opacity: 0; }
+            50% { transform: translateY(-15vh) rotate(90deg); opacity: 0.8; }
+            100% { transform: translateY(0) rotate(180deg); opacity: 0.6; }
         }
 
         /* Верхняя панель */
         #prizeBar {
-            padding: 25px;
-            background: rgba(245, 222, 179, 0.95);
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
             text-align: center;
-            border-bottom: 5px solid #4a2c00;
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), inset 0 0 20px #ff66b3;
+            border-bottom: 2px solid #ffd700;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             position: relative;
-            overflow: hidden;
-        }
-        #prizeBar::before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: -15px;
-            width: 60px;
-            height: 60px;
-            background: url('https://img.icons8.com/ios-filled/50/b8860b/magnifying-glass.png') no-repeat center;
-            background-size: contain;
-            opacity: 0.6;
-            animation: pulseIcon 2.5s infinite alternate;
-        }
-        #prizeBar::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            right: -15px;
-            width: 60px;
-            height: 60px;
-            background: url('https://img.icons8.com/ios-filled/50/4a2c00/fingerprint.png') no-repeat center;
-            background-size: contain;
-            opacity: 0.6;
-            animation: pulseIcon 2.5s infinite alternate;
-        }
-        @keyframes pulseIcon {
-            from { transform: scale(1); opacity: 0.6; }
-            to { transform: scale(1.2); opacity: 0.9; }
         }
         #prizeText {
-            font-size: 38px;
+            font-size: 30px;
             font-weight: bold;
-            color: #4a2c00;
-            text-shadow: 0 0 15px #fff, 0 0 25px #ff66b3;
+            color: #ff66b3;
+            text-shadow: 0 0 5px #ffd700;
         }
         .prize-word {
             display: inline-block;
             opacity: 0;
-            margin: 0 10px;
-            transition: opacity 0.6s;
+            margin: 0 8px;
+            transition: opacity 0.5s;
         }
         .reveal {
             opacity: 1;
-            animation: fadeInGlow 2s ease-in-out, bounceWord 1.5s ease-in-out;
+            animation: gentleFade 1s ease-in-out;
         }
-        @keyframes fadeInGlow {
-            0% { transform: scale(0.7); opacity: 0; }
-            50% { transform: scale(1.3); opacity: 0.9; }
+        @keyframes gentleFade {
+            0% { transform: scale(0.8); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
-        @keyframes bounceWord {
-            0% { transform: translateY(0); }
-            20% { transform: translateY(-30px); }
-            40% { transform: translateY(15px); }
-            60% { transform: translateY(-10px); }
-            80% { transform: translateY(5px); }
-            100% { transform: translateY(0); }
-        }
 
-        /* Контент */
+        /* Секции */
         .section {
             display: none;
-            margin: 25px auto;
+            margin: 20px auto;
             width: 90%;
-            max-width: 950px;
-            background: rgba(245, 222, 179, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.6), inset 0 0 30px #ff66b3;
-            border: 4px solid #ff66b3;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ff66b3;
             position: relative;
         }
-        .section::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            width: 50px;
-            height: 50px;
-            background: url('https://img.icons8.com/ios-filled/50/4a2c00/magnifying-glass.png') no-repeat center;
-            background-size: contain;
-            opacity: 0.7;
-            animation: swayIcon 4s infinite ease-in-out;
-        }
-        .section::after {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            right: -20px;
-            width: 50px;
-            height: 50px;
-            background: url('https://img.icons8.com/ios-filled/50/b8860b/fingerprint.png') no-repeat center;
-            background-size: contain;
-            opacity: 0.7;
-            animation: spinClueSmall 6s infinite linear;
-        }
-        @keyframes swayIcon {
-            0% { transform: rotate(0deg); }
-            50% { transform: rotate(15deg); }
-            100% { transform: rotate(0deg); }
-        }
-        @keyframes spinClueSmall {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .active {
+        .section.active {
             display: block;
-            animation: sectionFadeIn 1.5s ease-in-out;
+            animation: smoothSlide 1s ease-in-out;
         }
-        @keyframes sectionFadeIn {
-            0% { transform: scale(0.8) rotate(-8deg); opacity: 0; }
-            50% { transform: scale(1.1) rotate(4deg); opacity: 0.8; }
-            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        @keyframes smoothSlide {
+            0% { transform: translateY(15px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
         }
         h2 {
-            font-size: 36px;
-            color: #4a2c00;
-            text-shadow: 0 0 15px #fff, 0 0 25px #ff66b3;
-            margin-bottom: 25px;
-            animation: pulseText 2.5s infinite alternate;
+            font-size: 28px;
+            color: #ff66b3;
+            text-align: center;
+            margin-bottom: 15px;
         }
-        @keyframes pulseText {
-            from { transform: scale(1); text-shadow: 0 0 15px #ff66b3; }
-            to { transform: scale(1.1); text-shadow: 0 0 25px #ff66b3; }
+        p {
+            font-size: 18px;
+            color: #ff66b3;
+            text-align: center;
         }
         input, button {
-            padding: 16px 30px;
-            margin: 15px;
-            font-size: 22px;
-            border: 3px solid #ff66b3;
-            border-radius: 12px;
-            background: #fffaf0;
-            color: #4a2c00;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), inset 0 0 15px #ff66b3;
-            transition: all 0.5s;
-        }
-        input {
-            background: #f5f5f5;
-            border: 3px solid #4a2c00;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 18px;
+            border: 2px solid #ffd700;
+            border-radius: 8px;
+            background: #fff;
+            color: #ff66b3;
+            transition: all 0.3s ease;
         }
         input:focus {
             outline: none;
-            box-shadow: 0 0 30px #ff66b3, inset 0 0 20px #4a2c00;
+            box-shadow: 0 0 8px #ffd700;
         }
         button:hover {
-            background: #ff66b3;
+            background: #ffd700;
             color: #fff;
-            box-shadow: 0 0 40px #ff66b3, 0 0 50px #4a2c00;
-            transform: scale(1.15) rotate(3deg);
+            transform: scale(1.05);
         }
         .message {
-            font-size: 28px;
-            color: #4a2c00;
-            text-shadow: 0 0 10px #fff, 0 0 20px #ff66b3;
-            margin-top: 20px;
+            font-size: 20px;
+            color: #ff66b3;
+            text-align: center;
+            margin-top: 10px;
         }
 
-        /* Анимации */
-        .magnifier {
-            position: absolute;
-            width: 140px;
-            height: 140px;
-            background: url('https://img.icons8.com/ios-filled/50/4a2c00/search.png') no-repeat center;
-            background-size: contain;
-            animation: magnify 3s ease-in-out forwards;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            filter: drop-shadow(0 0 25px #4a2c00);
-            z-index: 999;
-        }
-        @keyframes magnify {
-            0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; }
-            40% { transform: translate(-50%, -50%) scale(2) rotate(180deg); opacity: 1; }
-            70% { transform: translate(-50%, -50%) scale(1.5) rotate(360deg); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(0) rotate(720deg); opacity: 0; }
-        }
-
-        .lock {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            background: url('https://img.icons8.com/ios-filled/50/ff66b3/lock.png') no-repeat center;
-            background-size: contain;
-            animation: unlock 3s ease-in-out forwards;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            filter: drop-shadow(0 0 25px #ff66b3);
-            z-index: 999;
-        }
-        @keyframes unlock {
-            0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
-            40% { transform: translate(-50%, -50%) scale(1.6) rotate(90deg); opacity: 1; }
-            70% { transform: translate(-50%, -50%) scale(1.3) rotate(180deg); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(0) rotate(360deg); opacity: 0; }
-        }
-
-        .door {
+        /* Эффекты */
+        .magnifier, .letter, .door {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(245, 222, 179, 0.95);
-            animation: openDoor 4s ease-in-out forwards;
-            z-index: 999;
-        }
-        .door::before {
-            content: '';
-            position: absolute;
-            width: 180px;
-            height: 180px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: url('https://img.icons8.com/ios-filled/50/4a2c00/door.png') no-repeat center;
+            z-index: 1000;
+        }
+        .magnifier {
+            width: 100px;
+            height: 100px;
+            background: url('https://img.icons8.com/ios-filled/50/ffffff/search.png') no-repeat center;
             background-size: contain;
-            animation: doorSpin 4s ease-in-out forwards;
-            filter: drop-shadow(0 0 30px #4a2c00);
+            animation: smoothMagnify 1.5s ease-out forwards;
         }
-        .door::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255, 102, 179, 0.4), transparent);
-            animation: doorGlow 4s ease-in-out forwards;
+        .letter {
+            width: 80px;
+            height: 80px;
+            background: url('https://img.icons8.com/ios-filled/50/ffffff/letter.png') no-repeat center;
+            background-size: contain;
+            animation: smoothLetter 1.5s ease-out forwards;
         }
-        @keyframes openDoor {
-            0% { opacity: 1; transform: scale(1); }
-            40% { opacity: 1; transform: scale(1.2); }
-            70% { opacity: 0.8; transform: scale(1.1); }
-            100% { opacity: 0; transform: scale(1.3); }
+        .door {
+            width: 150px;
+            height: 150px;
+            background: url('https://img.icons8.com/ios-filled/50/ffffff/door.png') no-repeat center;
+            background-size: contain;
+            animation: smoothDoor 2s ease-out forwards;
         }
-        @keyframes doorSpin {
-            0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
-            40% { transform: translate(-50%, -50%) scale(1.4) rotate(45deg); }
-            70% { transform: translate(-50%, -50%) scale(1.2) rotate(90deg); }
-            100% { transform: translate(-50%, -100%) scale(1.6) rotate(180deg); }
+        @keyframes smoothMagnify {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
-        @keyframes doorGlow {
-            0% { opacity: 0; }
-            40% { opacity: 0.6; }
-            70% { opacity: 0.4; }
-            100% { opacity: 0; }
+        @keyframes smoothLetter {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        @keyframes smoothDoor {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <!-- Разбросанные элементы -->
-    <div class="scattered photo" style="top: 10%; left: 15%; animation-delay: 0s;"></div>
-    <div class="scattered photo" style="top: 60%; left: 80%; animation-delay: 2s;"></div>
-    <div class="scattered photo" style="top: 80%; left: 20%; animation-delay: 4s;"></div>
-    <div class="scattered photo" style="top: 30%; left: 50%; animation-delay: 6s;"></div>
-    <div class="scattered letter" style="top: 25%; left: 70%;">6</div>
-    <div class="scattered letter" style="top: 45%; left: 10%;">А</div>
-    <div class="scattered letter" style="top: 65%; left: 90%;">8</div>
-    <div class="scattered letter" style="top: 15%; left: 40%;">Д</div>
-    <div class="scattered letter" style="top: 75%; left: 60%;">М</div>
-    <div class="scattered clue" style="top: 20%; left: 85%; animation-delay: 1s;"></div>
-    <div class="scattered clue" style="top: 70%; left: 25%; animation-delay: 3s;"></div>
-    <div class="scattered paper" style="top: 35%; left: 65%; animation-delay: 5s;"></div>
-    <div class="scattered paper" style="top: 85%; left: 45%; animation-delay: 7s;"></div>
-    <div class="scattered rose" style="top: 40%; left: 30%; animation-delay: 0.5s;"></div>
-    <div class="scattered rose" style="top: 50%; left: 75%; animation-delay: 3.5s;"></div>
+    <!-- Фоновые элементы -->
+    <div class="bg-element gift" style="top: 10%; left: 15%; animation-delay: 0s;"></div>
+    <div class="bg-element gift" style="top: 60%; left: 80%; animation-delay: 2s;"></div>
+    <div class="bg-element rose" style="top: 30%; left: 40%; animation-delay: 1s;"></div>
+    <div class="bg-element rose" style="top: 70%; left: 20%; animation-delay: 3s;"></div>
 
-    <!-- Фоновые частицы -->
-    <div class="background-particles" id="bgParticles"></div>
-    <!-- Эффектные частицы -->
-    <div class="effect-particles" id="effectParticles"></div>
-
-    <!-- Верхняя панель */
+    <!-- Верхняя панель с "Призы за дверью!" -->
     <div id="prizeBar">
         <span id="prizeText">
             <span class="prize-word" id="word1">Призы</span>
@@ -495,19 +210,56 @@
 
     <!-- Часть 1: Улики поздравления -->
     <div id="part1" class="section active">
-        <h2>Взломай послание</h2>
+        <h2>Найди поздравление</h2>
         <input type="text" id="greetingInput" placeholder="Без пробелов и запятой">
         <button onclick="checkGreeting()">Проверить</button>
         <div id="message1" class="message"></div>
     </div>
 
-    <!-- Часть 2: Детективный замок -->
+    <!-- Часть 2: 5 сложных загадок про 8 марта для 6 класса -->
     <div id="part2" class="section">
-        <h2>Открой замок</h2>
-        <button onclick="checkKey('ВЕСНА')">ВЕСНА</button>
-        <button onclick="checkKey('ЗИМА')">ЗИМА</button>
-        <button onclick="checkKey('ЛЕТО')">ЛЕТО</button>
-        <div id="message2" class="message"></div>
+        <h2>Разгадай загадки</h2>
+        <div id="riddle1" class="riddle">
+            <p>Какой цветок на 8 марта скрывает маленькие шарики под лепестками? <br>
+                <button onclick="checkRiddle(1, 'МИМОЗА')">МИМОЗА</button>
+                <button onclick="checkRiddle(1, 'РОЗА')">РОЗА</button>
+                <button onclick="checkRiddle(1, 'ТЮЛЬПАН')">ТЮЛЬПАН</button>
+            </p>
+            <div id="messageR1" class="message"></div>
+        </div>
+        <div id="riddle2" class="riddle" style="display: none;">
+            <p>Какой день в марте отмечают, если посчитать буквы в "весна"? <br>
+                <button onclick="checkRiddle(2, 'ВОСЬМОЕ')">ВОСЬМОЕ</button>
+                <button onclick="checkRiddle(2, 'ПЯТЬ')">ПЯТЬ</button>
+                <button onclick="checkRiddle(2, 'ДЕСЯТОЕ')">ДЕСЯТОЕ</button>
+            </p>
+            <div id="messageR2" class="message"></div>
+        </div>
+        <div id="riddle3" class="riddle" style="display: none;">
+            <p>Что на 8 марта дарят, если сладость прячется в обёртке? <br>
+                <button onclick="checkRiddle(3, 'КОНФЕТЫ')">КОНФЕТЫ</button>
+                <button onclick="checkRiddle(3, 'ФРУКТЫ')">ФРУКТЫ</button>
+                <button onclick="checkRiddle(3, 'ПЕЧЕНЬЕ')">ПЕЧЕНЬЕ</button>
+            </p>
+            <div id="messageR3" class="message"></div>
+        </div>
+        <div id="riddle4" class="riddle" style="display: none;">
+            <p>Кого в школе поздравляют на 8 марта, если половина класса улыбается? <br>
+                <button onclick="checkRiddle(4, 'ДЕВОЧЕК')">ДЕВОЧЕК</button>
+                <button onclick="checkRiddle(4, 'УЧИТЕЛЕЙ')">УЧИТЕЛЕЙ</button>
+                <button onclick="checkRiddle(4, 'РОДИТЕЛЕЙ')">РОДИТЕЛЕЙ</button>
+            </p>
+            <div id="messageR4" class="message"></div>
+        </div>
+        <div id="riddle5" class="riddle" style="display: none;">
+            <p>Что на открытке для 8 марта появляется, если сложить буквы поздравления? <br>
+                <button onclick="checkRiddle(5, 'ПОЗДРАВЛЯЮ')">ПОЗДРАВЛЯЮ</button>
+                <button onclick="checkRiddle(5, 'СПАСИБО')">СПАСИБО</button>
+                <button onclick="checkRiddle(5, 'УДАЧИ')">УДАЧИ</button>
+            </p>
+            <div id="messageR5" class="message"></div>
+        </div>
+        <div id="finalLetter" class="message" style="display: none;"></div>
     </div>
 
     <!-- Часть 3: QR-квест -->
@@ -519,42 +271,15 @@
     </div>
 
     <script>
-        const bgParticleContainer = document.getElementById("bgParticles");
-        const effectParticleContainer = document.getElementById("effectParticles");
-
-        // Фоновые частицы (пыль и искры)
-        for (let i = 0; i < 30; i++) {
-            const dust = document.createElement("div");
-            dust.className = "bg-dust";
-            dust.style.left = `${Math.random() * 100}%`;
-            dust.style.top = `${Math.random() * 100}%`;
-            dust.style.animationDelay = `${Math.random() * 15}s`;
-            bgParticleContainer.appendChild(dust);
-
-            const spark = document.createElement("div");
-            spark.className = "bg-spark";
-            spark.style.left = `${Math.random() * 100}%`;
-            spark.style.top = `${Math.random() * 100}%`;
-            spark.style.animationDelay = `${Math.random() * 12}s`;
-            bgParticleContainer.appendChild(spark);
-        }
-
-        // Создание эффектных частиц
-        function createParticles(type, count, x, y) {
-            for (let i = 0; i < count; i++) {
-                const particle = document.createElement("div");
-                particle.className = type;
-                const dx = (Math.random() - 0.5) * 250;
-                const dy = (Math.random() - 0.5) * 250;
-                particle.style.left = `${x}px`;
-                particle.style.top = `${y}px`;
-                particle.style.setProperty("--dx", `${dx}px`);
-                particle.style.setProperty("--dy", `${dy}px`);
-                particle.style.animationDelay = `${Math.random() * 0.5}s`;
-                effectParticleContainer.appendChild(particle);
-                setTimeout(() => particle.remove(), 3000);
-            }
-        }
+        let riddleCount = 0;
+        const riddles = [
+            { id: 1, answer: "МИМОЗА" },
+            { id: 2, answer: "ВОСЬМОЕ" },
+            { id: 3, answer: "КОНФЕТЫ" },
+            { id: 4, answer: "ДЕВОЧЕК" },
+            { id: 5, answer: "ПОЗДРАВЛЯЮ" }
+        ];
+        const letters = ["М", "А", "Р", "Т", "Р"]; // Буквы после угадывания
 
         // Часть 1: Проверка поздравления
         function checkGreeting() {
@@ -567,37 +292,42 @@
                 const magnifier = document.createElement("div");
                 magnifier.className = "magnifier";
                 document.body.appendChild(magnifier);
-                createParticles("petal", 25, window.innerWidth / 2, window.innerHeight / 2);
-                createParticles("spark", 15, window.innerWidth / 2, window.innerHeight / 2);
                 setTimeout(() => {
                     magnifier.remove();
                     document.getElementById("word1").classList.add("reveal");
                     document.getElementById("word2").classList.add("reveal");
                     document.getElementById("part1").classList.remove("active");
                     document.getElementById("part2").classList.add("active");
-                }, 3000);
+                    document.getElementById("riddle1").style.display = "block";
+                }, 1500);
             } else {
                 messageDiv.innerHTML = `<span class="animate__animated animate__shakeX">Ошибка!</span>`;
             }
         }
 
-        // Часть 2: Детективный замок
-        function checkKey(key) {
-            const messageDiv = document.getElementById("message2");
-            if (key === "ВЕСНА") {
-                messageDiv.innerHTML = `<span class="animate__animated animate__fadeIn">Замок открыт!</span>`;
-                const lock = document.createElement("div");
-                lock.className = "lock";
-                document.body.appendChild(lock);
-                createParticles("dust", 20, window.innerWidth / 2, window.innerHeight / 2);
-                createParticles("petal", 15, window.innerWidth / 2, window.innerHeight / 2);
-                createParticles("spark", 10, window.innerWidth / 2, window.innerHeight / 2);
-                setTimeout(() => {
-                    lock.remove();
-                    document.getElementById("word3").classList.add("reveal");
-                    document.getElementById("part2").classList.remove("active");
-                    document.getElementById("part3").classList.add("active");
-                }, 3000);
+        // Часть 2: Проверка загадок
+        function checkRiddle(riddleId, answer) {
+            const riddle = riddles.find(r => r.id === riddleId);
+            const messageDiv = document.getElementById(`messageR${riddleId}`);
+            if (answer === riddle.answer) {
+                messageDiv.innerHTML = `<span class="animate__animated animate__fadeIn">Правильно!</span>`;
+                riddleCount++;
+                document.getElementById(`riddle${riddleId}`).style.display = "none";
+                if (riddleCount < 5) {
+                    document.getElementById(`riddle${riddleCount + 1}`).style.display = "block";
+                } else {
+                    const letter = document.createElement("div");
+                    letter.className = "letter";
+                    document.body.appendChild(letter);
+                    setTimeout(() => {
+                        letter.remove();
+                        document.getElementById("finalLetter").style.display = "block";
+                        document.getElementById("finalLetter").innerHTML = `Ты получил букву: ${letters[riddleCount - 1]}!`;
+                        document.getElementById("word3").classList.add("reveal");
+                        document.getElementById("part2").classList.remove("active");
+                        document.getElementById("part3").classList.add("active");
+                    }, 1500);
+                }
             } else {
                 messageDiv.innerHTML = `<span class="animate__animated animate__shakeX">Неверно!</span>`;
             }
@@ -614,12 +344,9 @@
                 const door = document.createElement("div");
                 door.className = "door";
                 document.body.appendChild(door);
-                createParticles("petal", 30, window.innerWidth / 2, window.innerHeight / 2);
-                createParticles("dust", 20, window.innerWidth / 2, window.innerHeight / 2);
-                createParticles("spark", 25, window.innerWidth / 2, window.innerHeight / 2);
                 setTimeout(() => {
                     door.remove();
-                }, 4000);
+                }, 2000);
             } else {
                 messageDiv.innerHTML = `<span class="animate__animated animate__shakeX">Код неверный!</span>`;
             }
