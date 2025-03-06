@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Дело о Призах 8 Марта</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" onerror="this.onerror=null;alert('Ошибка загрузки стилей animate.css');">
     <style>
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #ff99cc, #ffd700); /* Мягкий розово-золотой градиент */
+            background: linear-gradient(135deg, #ff99cc, #ffd700);
             font-family: 'Arial', sans-serif;
             color: #fff;
             overflow: hidden;
@@ -34,8 +34,6 @@
             50% { opacity: 1; }
             100% { opacity: 0.7; }
         }
-
-        /* Фоновые элементы */
         .bg-element {
             position: absolute;
             pointer-events: none;
@@ -60,8 +58,6 @@
             50% { transform: translateY(-15vh) rotate(90deg); opacity: 0.8; }
             100% { transform: translateY(0) rotate(180deg); opacity: 0.6; }
         }
-
-        /* Верхняя панель */
         #prizeBar {
             padding: 20px;
             background: rgba(255, 255, 255, 0.9);
@@ -90,8 +86,6 @@
             0% { transform: scale(0.8); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
-
-        /* Секции */
         .section {
             display: none;
             margin: 20px auto;
@@ -148,8 +142,6 @@
             text-align: center;
             margin-top: 10px;
         }
-
-        /* Эффекты */
         .magnifier, .letter, .door {
             position: fixed;
             top: 50%;
@@ -193,13 +185,11 @@
     </style>
 </head>
 <body>
-    <!-- Фоновые элементы -->
     <div class="bg-element gift" style="top: 10%; left: 15%; animation-delay: 0s;"></div>
     <div class="bg-element gift" style="top: 60%; left: 80%; animation-delay: 2s;"></div>
     <div class="bg-element rose" style="top: 30%; left: 40%; animation-delay: 1s;"></div>
     <div class="bg-element rose" style="top: 70%; left: 20%; animation-delay: 3s;"></div>
 
-    <!-- Верхняя панель с "Призы за дверью!" -->
     <div id="prizeBar">
         <span id="prizeText">
             <span class="prize-word" id="word1">Призы</span>
@@ -208,7 +198,6 @@
         </span>
     </div>
 
-    <!-- Часть 1: Улики поздравления -->
     <div id="part1" class="section active">
         <h2>Найди поздравление</h2>
         <input type="text" id="greetingInput" placeholder="Без пробелов и запятой">
@@ -216,7 +205,6 @@
         <div id="message1" class="message"></div>
     </div>
 
-    <!-- Часть 2: 5 сложных загадок про 8 марта для 6 класса -->
     <div id="part2" class="section">
         <h2>Разгадай загадки</h2>
         <div id="riddle1" class="riddle">
@@ -228,7 +216,7 @@
             <div id="messageR1" class="message"></div>
         </div>
         <div id="riddle2" class="riddle" style="display: none;">
-            <p>Какой день в марте отмечают, если посчитать буквы в "весна"? <br>
+            <p>Какой день в марте отмечают, если посчитать буквы в 'весна'? <br>
                 <button onclick="checkRiddle(2, 'ВОСЬМОЕ')">ВОСЬМОЕ</button>
                 <button onclick="checkRiddle(2, 'ПЯТЬ')">ПЯТЬ</button>
                 <button onclick="checkRiddle(2, 'ДЕСЯТОЕ')">ДЕСЯТОЕ</button>
@@ -262,7 +250,6 @@
         <div id="finalLetter" class="message" style="display: none;"></div>
     </div>
 
-    <!-- Часть 3: QR-квест -->
     <div id="part3" class="section">
         <h2>Раскрой код</h2>
         <input type="text" id="passwordInput" placeholder="Пароль из QR">
@@ -279,9 +266,8 @@
             { id: 4, answer: "ДЕВОЧЕК" },
             { id: 5, answer: "ПОЗДРАВЛЯЮ" }
         ];
-        const letters = ["М", "А", "Р", "Т", "Р"]; // Буквы после угадывания
+        const letters = ["М", "А", "Р", "Т", "Р"];
 
-        // Часть 1: Проверка поздравления
         function checkGreeting() {
             const input = document.getElementById("greetingInput").value.toUpperCase();
             const correctAnswer = "СПРАЗДНИКОМДЕТЕКТИВЫ";
@@ -305,7 +291,6 @@
             }
         }
 
-        // Часть 2: Проверка загадок
         function checkRiddle(riddleId, answer) {
             const riddle = riddles.find(r => r.id === riddleId);
             const messageDiv = document.getElementById(`messageR${riddleId}`);
@@ -333,7 +318,6 @@
             }
         }
 
-        // Часть 3: QR-квест
         function checkPassword() {
             const input = document.getElementById("passwordInput").value.toUpperCase();
             const correctAnswer = "МАРТРОЗЫ";
